@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as bs
 from parsers.competition import Competition
-import cairosvg
+import svglib
 
 locations = ["LIVE CODING CHALLENGE", "ONLINE", "ONSITE HACKATHON", 'ONLINE CREATIVE CHALLENGE']
 url_competitions_catalog = '/hackathons-and-challenges'
