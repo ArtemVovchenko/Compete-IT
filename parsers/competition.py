@@ -1,5 +1,4 @@
 class Competition:
-
     def __init__(self):
         self.title = None
         self.location = None
