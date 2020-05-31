@@ -1,17 +1,22 @@
 from parsers.competition import Competition
 import requests
 from bs4 import BeautifulSoup as bs
+import re
+from PIL import Image
+from io import BytesIO
 
 url = 'https://www.hackerearth.com/ru/challenges/hackathon/'
 
 
-def parse():
+def parse() -> list:
+    parsed_data = []
     page_response = requests.get(url)
     page_response.encoding = 'utf-8'
     page_searcher = bs(page_response.text, features='lxml')
     competitions_containers = select_all_competitions(page_searcher)
     for competitions_container in competitions_containers:
-        observe_competition(competitions_container)
+        parsed_data.append(observe_competition(competitions_container))
+    return parsed_data
 
 
 def observe_competition(competition_container_searcher: bs) -> Competition:
@@ -25,7 +30,10 @@ def observe_competition(competition_container_searcher: bs) -> Competition:
     competition.set_start_date(get_start_date(competition_page_observer))
     competition.set_end_date(get_end_date(competition_page_observer))
     competition.set_location(get_location(competition_page_observer))
-
+    # TODO: SET LINK
+    competition.link = competition_page_link
+    competition.set_image(get_photo(competition_container_searcher))
+    return competition
 
 
 def select_all_competitions(page_searcher: bs) -> list:
@@ -71,4 +79,15 @@ def get_description(observer: bs) -> str:
         return ''
 
 
-parse()
+def get_photo(observer: bs) -> object:
+    image_tag_str_url = observer.find('div', {'class': 'event-image'})['style']
+    url_link = re.search(r"\(\'.*\'\)", image_tag_str_url)
+    if url_link is None:
+        return None
+    url_link = url_link.group()[2:-2]
+    photo_response = requests.get(url_link)
+    img = Image.open(BytesIO(photo_response.content))
+    return img
+
+
+print(parse())
