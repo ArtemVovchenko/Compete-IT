@@ -87,6 +87,3 @@ def get_photo(observer: bs) -> object:
     photo_response = requests.get(url_link)
     img = Image.open(BytesIO(photo_response.content))
     return img
-
-
-print(parse())

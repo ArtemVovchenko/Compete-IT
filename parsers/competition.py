@@ -9,6 +9,8 @@ class Competition:
         self.image = None
         self.link = None
 
+    # TODO: VALIDATION
+
     def set_title(self, title: str):
         self.title = title
         return self

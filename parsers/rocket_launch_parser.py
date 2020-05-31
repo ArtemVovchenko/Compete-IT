@@ -97,5 +97,3 @@ def get_date(searcher: bs) -> str:
         return ""
     return date.text
 
-
-print(parse())
