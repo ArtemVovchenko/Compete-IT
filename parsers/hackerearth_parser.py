@@ -30,8 +30,7 @@ def observe_competition(competition_container_searcher: bs) -> Competition:
     competition.set_start_date(get_start_date(competition_page_observer))
     competition.set_end_date(get_end_date(competition_page_observer))
     competition.set_location(get_location(competition_page_observer))
-    # TODO: SET LINK
-    competition.link = competition_page_link
+    competition.set_link(competition_page_link)
     competition.set_image(get_photo(competition_container_searcher))
     return competition
 
