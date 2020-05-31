@@ -33,5 +33,8 @@ class Competition:
     def set_image(self, image: object):
         self.image = image
 
+    def set_link(self, link: str):
+        self.link = link
+
     def __str__(self):
         return f"{self.title} , {self.type} , {self.link}, {self.location}, {self.description}"
