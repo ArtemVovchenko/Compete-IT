@@ -34,4 +34,4 @@ class Competition:
         self.image = image
 
     def __str__(self):
-        return f"{self.title} , {self.type} , {self.link}"
+        return f"{self.title} , {self.type} , {self.link}, {self.location}, {self.description}"
