@@ -39,4 +39,4 @@ class Competition:
         self.link = link
 
     def __str__(self):
-        return f"{self.title} , {self.type} , {self.link}, {self.location}, {self.description}"
+        return f"{self.title}\n {self.type}\n {self.link}\n {self.start_date}\n {self.end_date} \n {self.location} \n {self.description}\n {self.image}"
