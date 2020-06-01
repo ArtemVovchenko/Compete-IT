@@ -35,7 +35,7 @@ def select_all_competitions(content: str):
 
 
 def observe_competitions(
-        competitions: list) -> list:  # TODO: Add SVG -> PNG CONVERTATION AND SAVING TO COMPETITION CLASS
+        competitions: list) -> list:
     competitions_list = []
     for competition_info in competitions:
         competition_location = get_location(competition_info)
@@ -65,6 +65,7 @@ def observe_competitions(
         class_competition.set_description(competition_description)
         class_competition.set_title(competition_title)
         class_competition.set_type(competition_type)
+        class_competition.set_link(url_base + competition_page_url['href'] + url_tail)
         competitions_list.append(class_competition)
 
     return competitions_list

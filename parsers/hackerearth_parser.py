@@ -36,10 +36,13 @@ def observe_competition(competition_container_searcher: bs) -> Competition:
 
 
 def select_all_competitions(page_searcher: bs) -> list:
-    upcoming_competitions_container = page_searcher.find('div', {'class': 'upcoming challenge-list'})
+    upcoming_competitions_container = page_searcher.find('div', {'class': 'upcoming challenge-list'}), page_searcher.find('div', {'class': 'ongoing challenge-list'})
     if upcoming_competitions_container is None:
         return []
-    return upcoming_competitions_container.find_all('div', {'class': 'challenge-card-modern'})
+    all_competitions = []
+    for container in upcoming_competitions_container:
+        all_competitions += container.find_all('div', {'class': 'challenge-card-modern'}, recursive=True)
+    return all_competitions
 
 
 def get_title(observer: bs) -> str:
